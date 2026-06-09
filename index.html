@@ -1,0 +1,924 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cartilla Acreditación FALP</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --azul:     #0d3b6e;
+    --azul-med: #1a5fa8;
+    --celeste:  #3a9bd5;
+    --rojo:     #d63031;
+    --naranja:  #e17055;
+    --verde:    #00875a;
+    --amarillo: #f9ca24;
+    --blanco:   #f8fafc;
+    --gris:     #e2e8f0;
+    --texto:    #1e293b;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--azul);
+    color: var(--texto);
+    min-height: 100vh;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0a2d56 0%, #1a5fa8 100%);
+    padding: 28px 32px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: repeating-linear-gradient(
+      45deg, transparent, transparent 18px,
+      rgba(255,255,255,.03) 18px, rgba(255,255,255,.03) 36px);
+  }
+  header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.4rem, 4vw, 2.2rem);
+    color: #fff;
+    letter-spacing: -0.5px;
+    position: relative;
+  }
+  header p {
+    color: rgba(255,255,255,.65);
+    font-size: .9rem;
+    margin-top: 6px;
+    position: relative;
+  }
+  .badge {
+    display: inline-block;
+    background: var(--rojo);
+    color: #fff;
+    font-size: .72rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 20px;
+    letter-spacing: .5px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+    position: relative;
+  }
+
+  /* ── NAV TABS ── */
+  nav {
+    display: flex;
+    gap: 6px;
+    padding: 16px 20px;
+    overflow-x: auto;
+    background: #0a2d56;
+    scrollbar-width: none;
+  }
+  nav::-webkit-scrollbar { display: none; }
+  .tab {
+    flex-shrink: 0;
+    padding: 8px 16px;
+    border-radius: 30px;
+    border: 2px solid rgba(255,255,255,.2);
+    background: transparent;
+    color: rgba(255,255,255,.7);
+    font-family: 'DM Sans', sans-serif;
+    font-size: .82rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all .25s;
+    white-space: nowrap;
+  }
+  .tab:hover { border-color: var(--celeste); color: #fff; }
+  .tab.active {
+    background: var(--celeste);
+    border-color: var(--celeste);
+    color: #fff;
+    box-shadow: 0 4px 14px rgba(58,155,213,.4);
+  }
+
+  /* ── MAIN CONTENT ── */
+  main {
+    padding: 20px;
+    max-width: 900px;
+    margin: 0 auto;
+  }
+  .section { display: none; animation: fadeUp .35s ease; }
+  .section.active { display: block; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── SECTION TITLE ── */
+  .sec-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.5rem;
+    color: #fff;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .sec-icon {
+    width: 42px; height: 42px;
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+
+  /* ── CARDS GRID ── */
+  .grid { display: grid; gap: 14px; }
+  .grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+
+  .card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 20px 22px;
+    box-shadow: 0 4px 20px rgba(0,0,0,.18);
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 5px; height: 100%;
+    border-radius: 16px 0 0 16px;
+  }
+  .card.azul::before   { background: var(--azul-med); }
+  .card.rojo::before   { background: var(--rojo); }
+  .card.verde::before  { background: var(--verde); }
+  .card.naranja::before{ background: var(--naranja); }
+  .card.amarillo::before{ background: var(--amarillo); }
+  .card.celeste::before { background: var(--celeste); }
+
+  .card-label {
+    font-size: .72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-bottom: 8px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    display: inline-block;
+  }
+  .card.azul .card-label    { background: #dbeafe; color: var(--azul-med); }
+  .card.rojo .card-label    { background: #fee2e2; color: var(--rojo); }
+  .card.verde .card-label   { background: #d1fae5; color: var(--verde); }
+  .card.naranja .card-label { background: #ffedd5; color: #c05621; }
+  .card.amarillo .card-label{ background: #fef9c3; color: #854d0e; }
+  .card.celeste .card-label { background: #e0f2fe; color: #0369a1; }
+
+  .card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    color: var(--texto);
+    margin-bottom: 10px;
+    line-height: 1.3;
+  }
+  .card p, .card li {
+    font-size: .88rem;
+    color: #475569;
+    line-height: 1.6;
+  }
+  .card ul { padding-left: 18px; }
+  .card ul li { margin-bottom: 4px; }
+
+  /* ── HIGHLIGHT BOX ── */
+  .highlight {
+    background: linear-gradient(135deg, #1a5fa8, #0d3b6e);
+    border-radius: 14px;
+    padding: 18px 22px;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .highlight h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    margin-bottom: 8px;
+    color: var(--amarillo);
+  }
+  .highlight p, .highlight li {
+    font-size: .88rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,.88);
+  }
+  .highlight ul { padding-left: 18px; }
+
+  /* ── PREGUNTA / RESPUESTA (acordeón) ── */
+  .qa-item {
+    background: #fff;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,.12);
+  }
+  .qa-q {
+    padding: 16px 20px;
+    font-weight: 600;
+    font-size: .9rem;
+    color: var(--azul);
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    user-select: none;
+  }
+  .qa-q:hover { background: #f1f5f9; }
+  .qa-q .arrow {
+    transition: transform .25s;
+    font-size: 1.1rem;
+    color: var(--celeste);
+  }
+  .qa-q.open .arrow { transform: rotate(180deg); }
+  .qa-a {
+    display: none;
+    padding: 0 20px 16px;
+    font-size: .87rem;
+    color: #475569;
+    line-height: 1.7;
+    border-top: 1px solid #e2e8f0;
+    padding-top: 14px;
+  }
+  .qa-a.visible { display: block; }
+  .qa-a strong { color: var(--azul); }
+  .qa-a ul { padding-left: 18px; margin-top: 6px; }
+
+  /* ── STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 10px; }
+  .step {
+    display: flex;
+    gap: 14px;
+    background: #fff;
+    border-radius: 14px;
+    padding: 16px 18px;
+    box-shadow: 0 2px 10px rgba(0,0,0,.1);
+    align-items: flex-start;
+  }
+  .step-num {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--celeste);
+    color: #fff;
+    font-family: 'Syne', sans-serif;
+    font-size: .95rem;
+    font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .step-num.rojo { background: var(--rojo); }
+  .step-num.verde { background: var(--verde); }
+  .step p { font-size: .88rem; color: #475569; line-height: 1.6; }
+  .step strong { color: var(--texto); }
+
+  /* ── PILL TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .tag {
+    background: #e0f2fe;
+    color: #0369a1;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: .8rem;
+    font-weight: 600;
+  }
+  .tag.rojo { background: #fee2e2; color: var(--rojo); }
+  .tag.verde { background: #d1fae5; color: var(--verde); }
+  .tag.naranja { background: #ffedd5; color: #c05621; }
+
+  /* ── PROGRESS BAR ── */
+  .progress-bar {
+    background: rgba(255,255,255,.15);
+    border-radius: 8px;
+    height: 6px;
+    margin-top: 8px;
+  }
+  .progress-fill {
+    height: 100%;
+    border-radius: 8px;
+    background: var(--celeste);
+    transition: width .5s ease;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 24px;
+    color: rgba(255,255,255,.4);
+    font-size: .8rem;
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 480px) {
+    nav { padding: 12px; }
+    main { padding: 14px; }
+  }
+  /* ── CUESTIONARIO ── */
+  .q-card {
+    background: #fff; border-radius: 16px; padding: 20px 22px;
+    margin-bottom: 14px; box-shadow: 0 4px 20px rgba(0,0,0,.15);
+  }
+  .q-card .q-num {
+    font-size: .72rem; font-weight: 700; text-transform: uppercase;
+    letter-spacing: .8px; color: var(--celeste); margin-bottom: 6px;
+  }
+  .q-card .q-texto {
+    font-family: 'Syne', sans-serif; font-size: .95rem;
+    color: var(--texto); margin-bottom: 14px; line-height: 1.4;
+  }
+  .q-opcion {
+    display: flex; align-items: center; gap: 10px;
+    padding: 11px 14px; border-radius: 10px; margin-bottom: 8px;
+    border: 2px solid #e2e8f0; cursor: pointer;
+    font-size: .87rem; color: #475569;
+    transition: all .2s; user-select: none;
+  }
+  .q-opcion:hover { border-color: var(--celeste); background: #f0f9ff; }
+  .q-opcion input[type=radio] { accent-color: var(--celeste); width:16px; height:16px; flex-shrink:0; }
+  .q-opcion.correcta { border-color: var(--verde); background: #d1fae5; color: #065f46; font-weight: 600; }
+  .q-opcion.incorrecta { border-color: var(--rojo); background: #fee2e2; color: #7f1d1d; }
+  .q-opcion.correcta-no-elegida { border-color: var(--verde); background: #d1fae5; color: #065f46; opacity:.75; }
+  .q-feedback {
+    margin-top: 10px; padding: 10px 14px; border-radius: 10px;
+    font-size: .84rem; line-height: 1.5; display: none;
+  }
+  .q-feedback.correcto { background: #d1fae5; color: #065f46; }
+  .q-feedback.incorrecto { background: #fee2e2; color: #7f1d1d; }
+  .resultado-box {
+    border-radius: 16px; padding: 24px; text-align: center;
+    background: linear-gradient(135deg, #1a5fa8, #0d3b6e); color: #fff;
+  }
+  .resultado-box .puntaje {
+    font-family: 'Syne', sans-serif; font-size: 3rem; font-weight: 800;
+    color: var(--amarillo); line-height: 1;
+  }
+  .resultado-box p { font-size: .9rem; color: rgba(255,255,255,.8); margin-top: 8px; }
+  .resultado-box .mensaje { font-family: 'Syne', sans-serif; font-size: 1.1rem; color: #fff; margin-top: 10px; }
+
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">🏥 FALP · Acreditación 2026</div>
+  <h1>Cartilla de Estudio</h1>
+  <p>Resumen interactivo · Toca cada tema para explorar</p>
+</header>
+
+<nav>
+  <button class="tab active" onclick="showTab('evacuacion')">🚨 Evacuación</button>
+  <button class="tab" onclick="showTab('citotoxicos')">⚗️ Accidentes</button>
+  <button class="tab" onclick="showTab('normas')">📋 Normas y Protocolos</button>
+  <button class="tab" onclick="showTab('codigorrojo')">🔴 Código Rojo</button>
+  <button class="tab" onclick="showTab('esterilizacion')">🧼 Esterilización</button>
+  <button class="tab" onclick="showTab('reclamos')">📋 Reclamos</button>
+  <button class="tab" onclick="showTab('identificacion')">🪪 ID Paciente</button>
+  <button class="tab" onclick="showTab('cuestionario')">✏️ Cuestionario</button>
+</nav>
+
+<main>
+
+  <!-- ═══════════════ EVACUACIÓN ═══════════════ -->
+  <div class="section active" id="evacuacion">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#fee2e2">🚨</div>
+      Plan de Evacuación
+    </div>
+
+    <div class="grid grid-2" style="margin-bottom:14px">
+      <div class="card rojo">
+        <span class="card-label">Urgente</span>
+        <h3>Números clave</h3>
+        <ul>
+          <li><strong>Emergencias no clínicas:</strong> <span style="font-size:1.3rem;font-weight:700;color:#d63031">911</span></li>
+          <li><strong>Alarma de incendio:</strong> se avisa por <em>altoparlante</em></li>
+        </ul>
+      </div>
+      <div class="card azul">
+        <span class="card-label">Orden de Evacuación</span>
+        <h3>¿Quién da la orden?</h3>
+        <ul>
+          <li>🟢 <strong>Hábil:</strong> Subgerente de Operaciones</li>
+          <li>🔵 <strong>Inhábil:</strong> Jefe de Turno de Mantenimiento</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-bottom:14px">
+      <h3>🅰🅱🅲🟠🟡 Claves de alarma</h3>
+      <ul>
+        <li><strong>A:</strong> Puede ser controlada por personal FALP</li>
+        <li><strong>B:</strong> Emergencia no controlable</li>
+        <li><strong>C:</strong> Evacuación total</li>
+        <li><strong>Naranja:</strong> Incendio tipo A (FALP) o tipo B (equipo externo)</li>
+        <li><strong>Amarilla:</strong> Derrames — radioactividad</li>
+      </ul>
+    </div>
+
+    <div class="sec-title" style="font-size:1.1rem;margin-top:4px">
+      <div class="sec-icon" style="background:#dcfce7;font-size:1rem">📍</div>
+      Orden y Rutas de Evacuación
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1°</div>
+        <div><p><strong>Visitas</strong> — salen primero</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">2°</div>
+        <div><p><strong>Pacientes</strong> según riesgo de caídas</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num">3°</div>
+        <div><p><strong>Trabajadores</strong> — salen últimos</p></div>
+      </div>
+    </div>
+
+    <div class="card celeste" style="margin-top:14px">
+      <span class="card-label">Ruta</span>
+      <h3>¿Por dónde evacuar?</h3>
+      <p>Vías de evacuación siguiendo <strong>señalética</strong> hasta zonas seguras.</p>
+    </div>
+
+    <div class="card verde" style="margin-top:14px">
+      <span class="card-label">Áreas de Seguridad</span>
+      <h3>📍 Puntos de encuentro</h3>
+      <ul>
+        <li>Intersección Cano y Aponte – Plazoleta PDI – Plaza 19 de Junio</li>
+        <li>José Manuel Infante con Rancagua (vereda sur-oriente)</li>
+        <li>Plazoleta Roberto del Río</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CITOTÓXICOS ═══════════════ -->
+  <div class="section" id="citotoxicos">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#ffedd5">⚗️</div>
+      Accidentes con Citotóxicos y Fluidos
+    </div>
+
+    <!-- Citotóxicos -->
+    <div class="card naranja" style="margin-bottom:14px">
+      <span class="card-label">Ante un derrame</span>
+      <h3>¿Qué hacer primero?</h3>
+      <ul>
+        <li>Solicitar <strong>kit anti-derrame</strong></li>
+        <li>Colocarse <strong>EPP</strong> inmediatamente</li>
+      </ul>
+    </div>
+
+    <div class="highlight" style="margin-bottom:14px">
+      <h3>⚠️ Accidente con citotóxico — pasos</h3>
+      <ul>
+        <li>Contacto en <strong>piel:</strong> lavar con agua por <strong>15 minutos</strong></li>
+        <li>Contacto <strong>ocular:</strong> irrigar con SF por <strong>15 minutos</strong></li>
+        <li>Retirar toda la ropa contaminada y dejarla en <strong>contenedor rojo</strong></li>
+      </ul>
+    </div>
+
+    <div class="card azul" style="margin-bottom:14px">
+      <span class="card-label">¿A quién informar?</span>
+      <h3>Notificación</h3>
+      <p>Informar a <strong>Jefatura / Supervisor</strong></p>
+      <p style="margin-top:6px">Centro de derivación: <strong>ACHS</strong></p>
+    </div>
+
+    <!-- Sangre / fluidos -->
+    <div class="sec-title" style="font-size:1.1rem;margin-top:20px">
+      <div class="sec-icon" style="background:#fee2e2;font-size:1rem">🩸</div>
+      Accidente con Sangre o Fluidos Corporales
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num rojo">1</div>
+        <div>
+          <p>Lavar inmediatamente <strong>mínimo 2 minutos</strong> con agua.</p>
+          <p style="margin-top:4px">Si es en <strong>ojo:</strong> usar suero fisiológico.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">2</div>
+        <div><p>Avisar a <strong>Jefatura / Supervisor</strong>, se deriva a ACHS.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">3</div>
+        <div><p>Tomar muestra al paciente con <strong>autorización del paciente o familia</strong> en tubo lila con anticoagulante <strong>5 cc</strong>.</p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">4</div>
+        <div><p>Jefatura llena <strong>DIAT</strong> e ingresa <strong>reporte a LISTPLUS</strong> dentro de las <strong>24 horas</strong>.</p></div>
+      </div>
+    </div>
+
+    <div class="card rojo" style="margin-top:14px">
+      <span class="card-label">Documentos para derivación</span>
+      <h3>Llevar a ACHS</h3>
+      <ul>
+        <li>Muestra fuente</li>
+        <li>Consentimiento firmado (paciente o familiar)</li>
+        <li>Carnet de Identidad</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CÓDIGO ROJO ═══════════════ -->
+  <div class="section" id="codigorrojo">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#fee2e2">🔴</div>
+      Código ROJO
+    </div>
+
+    <div class="highlight" style="background:linear-gradient(135deg,#b91c1c,#7f1d1d);margin-bottom:14px">
+      <h3 style="color:#fca5a5">⚠️ Definición</h3>
+      <p>Situación <strong>urgente</strong> que pone en peligro <strong>inmediato la vida</strong> de un paciente o persona.</p>
+    </div>
+
+    <div class="card rojo" style="margin-bottom:14px">
+      <span class="card-label">Situaciones en FALP</span>
+      <h3>Se considera Código Rojo</h3>
+      <div class="tags">
+        <span class="tag rojo">1. Convulsión</span>
+        <span class="tag rojo">2. Dificultad respiratoria</span>
+        <span class="tag rojo">3. Compromiso de conciencia</span>
+        <span class="tag rojo">4. Hemorragia intensa</span>
+        <span class="tag rojo">5. Paro Cardio-Respiratorio</span>
+      </div>
+    </div>
+
+    <div class="sec-title" style="font-size:1.1rem">
+      <div class="sec-icon" style="background:#fef9c3;font-size:1rem">✅</div>
+      ¿Qué hago frente a un Código Rojo?
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num rojo">1</div>
+        <div><p>Llamar al <strong style="font-size:1.2rem;color:#d63031">📞 5009</strong></p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">2</div>
+        <div><p><strong>Identificarme</strong></p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">3</div>
+        <div><p>Identificar con claridad <strong>la ubicación del suceso</strong></p></div>
+      </div>
+      <div class="step">
+        <div class="step-num rojo">4</div>
+        <div><p>Solicitar <strong>CÓDIGO ROJO</strong></p></div>
+      </div>
+    </div>
+
+    <div class="card celeste" style="margin-top:14px">
+      <span class="card-label">Equipo que responde</span>
+      <h3>¿Quién compone el Código Rojo?</h3>
+      <ul>
+        <li>Médico residente UPC</li>
+        <li>Guardia</li>
+        <li>Enfermera UPC</li>
+        <li>Enfermera / médico del sector donde ocurre el evento</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════ ESTERILIZACIÓN ═══════════════ -->
+  <div class="section" id="esterilizacion">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#dcfce7">🧼</div>
+      Esterilización
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card verde">
+        <span class="card-label">Material sucio</span>
+        <h3>¿Qué se hace primero?</h3>
+        <p>Se <strong>enjuaga con chorro de agua</strong> y se deja en el <strong>área de material sucio</strong>.</p>
+        <p style="margin-top:8px;color:#d63031;font-weight:600">⛔ En 5° piso NO se lava.</p>
+      </div>
+      <div class="card azul">
+        <span class="card-label">¿Dónde se lava?</span>
+        <h3>Central de Esterilización</h3>
+        <p>Todo el material para esterilización se lava en la <strong>Central de Esterilización</strong>.</p>
+      </div>
+    </div>
+
+    <div class="card naranja" style="margin-top:14px">
+      <span class="card-label">Reportes de Incidentes</span>
+      <h3>¿Dónde se reportan?</h3>
+      <p>En la plataforma <strong>LISTPLUS</strong></p>
+    </div>
+  </div>
+
+  <!-- ═══════════════ NORMAS Y PROTOCOLOS ═══════════════ -->
+  <div class="section" id="normas">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#fef9c3">📋</div>
+      Normas y Protocolos
+    </div>
+
+    <div class="highlight" style="margin-bottom:14px">
+      <h3>📌 ¿Dónde se revisan las normas y protocolos?</h3>
+      <p>En la plataforma <strong style="font-size:1.1rem">KAWAK</strong></p>
+    </div>
+
+    <div class="card amarillo">
+      <span class="card-label">Reportes de Incidentes</span>
+      <h3>¿Dónde se reportan los incidentes?</h3>
+      <p>En la plataforma <strong>LISTPLUS</strong></p>
+    </div>
+  </div>
+
+  <!-- ═══════════════ RECLAMOS ═══════════════ -->
+  <div class="section" id="reclamos">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#ede9fe">📋</div>
+      Reclamos — 3 Formas
+    </div>
+
+    <div class="highlight" style="margin-bottom:14px">
+      <h3>📌 Debes informar al paciente que existen 3 maneras</h3>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num verde">1</div>
+        <div>
+          <p><strong>Presencial — Horario Hábil</strong></p>
+          <p>Unidad de Servicio al Paciente, <strong>segundo piso</strong>, Torre Norte.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num verde">2</div>
+        <div>
+          <p><strong>Horario Inhábil</strong></p>
+          <p>Formulario en: Imagenología · Consultas ambulatorias · Radioterapia oriente · Centro médico · Estación de enfermería de servicios médico-quirúrgicos.<br>
+          También en <strong>www.falp.org</strong></p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num verde">3</div>
+        <div>
+          <p><strong>Reclamos por la atención de Telemedicina</strong></p>
+          <p>Sitio web: <strong>www.institutooncologicofalp.cl</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ IDENTIFICACIÓN PACIENTE ═══════════════ -->
+  <div class="section" id="identificacion">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#fef9c3">🪪</div>
+      Identificación del Paciente
+    </div>
+
+    <div class="grid grid-2" style="margin-bottom:14px">
+      <div class="card azul">
+        <span class="card-label">Ficha Clínica</span>
+        <h3>¿Qué es?</h3>
+        <ul>
+          <li>Es <strong>única por paciente</strong>, siempre debe estar con él.</li>
+          <li>El <strong>RUT</strong> es el verificador (no el folio).</li>
+        </ul>
+      </div>
+      <div class="card celeste">
+        <span class="card-label">Brazalete — Debe tener</span>
+        <h3>Datos obligatorios</h3>
+        <ul>
+          <li>2 nombres + 2 apellidos</li>
+          <li>RUT o DNI</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="highlight" style="margin-bottom:14px">
+      <h3>💡 Regla SSN / SSA</h3>
+      <ul>
+        <li>Sin 2° nombre → escribir <strong>SSN</strong> (ej: Juan <em>SSN</em> Pérez González)</li>
+        <li>Sin 2° apellido → escribir <strong>SSA</strong> (ej: Juan Luis Pérez <em>SSA</em>)</li>
+      </ul>
+    </div>
+
+    <div class="card naranja">
+      <span class="card-label">Si el brazalete no cabe en la muñeca</span>
+      <h3>¿Qué hacer?</h3>
+      <ul>
+        <li>Unir <strong>dos brazaletes</strong></li>
+        <li>O colocar en <strong>extremidades inferiores</strong></li>
+        <li>Dar aviso a <strong>todas las unidades</strong> implicadas y personal que atiende</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ═══════════════ CUESTIONARIO ═══════════════ -->
+  <div class="section" id="cuestionario">
+    <div class="sec-title">
+      <div class="sec-icon" style="background:#fef9c3">✏️</div>
+      Cuestionario de Práctica
+    </div>
+
+    <div class="highlight" style="margin-bottom:18px">
+      <h3>📝 Instrucciones</h3>
+      <p>Responde todas las preguntas y luego presiona <strong>"Ver resultados"</strong> para saber cuáles están correctas e incorrectas.</p>
+    </div>
+
+    <div id="quiz-container"></div>
+
+    <button id="btn-resultado" onclick="verResultados()" style="
+      display:block; width:100%; margin-top:18px; padding:16px;
+      background: linear-gradient(135deg,#1a5fa8,#0d3b6e);
+      color:#fff; border:none; border-radius:14px;
+      font-family:'Syne',sans-serif; font-size:1rem; font-weight:700;
+      cursor:pointer; letter-spacing:.3px;
+      box-shadow: 0 4px 14px rgba(13,59,110,.4);
+    ">Ver resultados 🎯</button>
+
+    <div id="resultado-final" style="display:none; margin-top:18px;"></div>
+
+    <button id="btn-reiniciar" onclick="reiniciarQuiz()" style="
+      display:none; width:100%; margin-top:12px; padding:14px;
+      background: rgba(255,255,255,.12);
+      color:#fff; border: 2px solid rgba(255,255,255,.3); border-radius:14px;
+      font-family:'DM Sans',sans-serif; font-size:.9rem; font-weight:600;
+      cursor:pointer;
+    ">🔄 Intentar de nuevo</button>
+  </div>
+
+</main>
+
+<footer>Cartilla generada para preparación de Acreditación FALP · 2026</footer>
+
+<script>
+  function showTab(id) {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    event.currentTarget.classList.add('active');
+  }
+
+  // ── BANCO COMPLETO DE PREGUNTAS (45) ──
+  const bancoPregunta = [
+    // EVACUACIÓN
+    { texto: "¿Cuál es el número de emergencias NO clínicas en FALP?", opciones: ["5009","911","133","131"], correcta: 1, feedback: "El número para emergencias no clínicas es el 911. El 5009 se usa para el Código Rojo interno." },
+    { texto: "¿Cómo te enteras de una alarma real de incendio en la clínica?", opciones: ["Por WhatsApp","Por altoparlante","Por correo electrónico","Por llamada directa"], correcta: 1, feedback: "La alarma de incendio se comunica por altoparlante." },
+    { texto: "¿Qué significa la clave NARANJA en el plan de evacuación?", opciones: ["Evacuación total","Derrame radioactivo","Incendio tipo A (FALP) o tipo B (externo)","Emergencia no controlable"], correcta: 2, feedback: "Naranja = Incendio tipo A (controlable por FALP) o tipo B (requiere equipo externo)." },
+    { texto: "¿Qué significa la clave AMARILLA en el plan de evacuación?", opciones: ["Incendio pequeño","Evacuación parcial","Derrames o radioactividad","Emergencia médica masiva"], correcta: 2, feedback: "La clave Amarilla corresponde a derrames y situaciones de radioactividad." },
+    { texto: "¿Qué significa la clave 'C' en el plan de evacuación?", opciones: ["Incendio controlable","Contaminación química","Evacuación total","Emergencia cardíaca"], correcta: 2, feedback: "La clave C significa Evacuación total del establecimiento." },
+    { texto: "¿Qué significa la clave 'A' en el plan de evacuación?", opciones: ["Evacuación total inmediata","Puede ser controlada por personal FALP","Emergencia no controlable","Alerta por derrame químico"], correcta: 1, feedback: "La clave A indica que la situación puede ser controlada por el propio personal de FALP." },
+    { texto: "¿Qué significa la clave 'B' en el plan de evacuación?", opciones: ["Puede ser controlada por FALP","Evacuación total","Emergencia no controlable","Incendio en bodega"], correcta: 2, feedback: "La clave B corresponde a una emergencia no controlable por FALP, que requiere apoyo externo." },
+    { texto: "¿En qué orden se evacuan las personas en FALP?", opciones: ["Trabajadores → Pacientes → Visitas","Pacientes → Visitas → Trabajadores","Visitas → Pacientes (riesgo caídas) → Trabajadores","Todos al mismo tiempo"], correcta: 2, feedback: "El orden correcto es: 1° Visitas, 2° Pacientes según riesgo de caídas, 3° Trabajadores." },
+    { texto: "¿Quién da la orden de evacuación en horario HÁBIL?", opciones: ["Jefe de Turno de Mantenimiento","Médico Jefe de Servicio","Subgerente de Operaciones","Guardia de seguridad"], correcta: 2, feedback: "En horario hábil la orden de evacuación la da el Subgerente de Operaciones." },
+    { texto: "¿Quién da la orden de evacuación en horario INHÁBIL?", opciones: ["Subgerente de Operaciones","Jefe de Turno de Mantenimiento","Médico residente UPC","Guardia de seguridad"], correcta: 1, feedback: "En horario inhábil la orden la da el Jefe de Turno de Mantenimiento." },
+    { texto: "¿Por dónde deben evacuar los pacientes y trabajadores?", opciones: ["Por el ascensor más cercano","Por la salida de emergencia más corta","Siguiendo señalética hacia zonas seguras","Por donde indique el guardia"], correcta: 2, feedback: "Se debe seguir la señalética de evacuación hasta llegar a las zonas seguras establecidas." },
+    { texto: "¿Cuál de los siguientes es un área de seguridad en FALP?", opciones: ["Estacionamiento subterráneo","Plazoleta Roberto del Río","Cafetería del 1° piso","Sala de espera de urgencias"], correcta: 1, feedback: "Los puntos de encuentro incluyen: Plazoleta Roberto del Río, Plazoleta PDI, Plaza 19 de Junio, J.M. Infante con Rancagua, entre otros." },
+    { texto: "¿Cuántas áreas de seguridad se mencionan en el plan de evacuación de FALP?", opciones: ["2","3","4","5"], correcta: 1, feedback: "Se mencionan 3 zonas principales: Intersección Cano y Aponte/Plazoleta PDI/Plaza 19 de Junio, J.M. Infante con Rancagua (vereda suroriente) y Plazoleta Roberto del Río." },
+
+    // ACCIDENTES / CITOTÓXICOS
+    { texto: "Frente a un derrame de citotóxico, ¿qué debes hacer primero?", opciones: ["Llamar al 911","Lavar el área con agua caliente","Solicitar kit anti-derrame y colocarse EPP","Avisar a los pacientes del sector"], correcta: 2, feedback: "Lo primero es solicitar el kit anti-derrame y colocarse el EPP antes de cualquier otra acción." },
+    { texto: "Si tienes contacto CUTÁNEO con un citotóxico, ¿qué debes hacer?", opciones: ["Irrigar con suero fisiológico 15 min","Lavar con agua por 15 minutos","Aplicar pomada antibiótica","Cubrir la zona y acudir a urgencias"], correcta: 1, feedback: "El contacto en piel requiere lavar con agua por 15 minutos. Para el ojo se usa suero fisiológico." },
+    { texto: "Si tienes contacto OCULAR con un citotóxico, ¿qué debes hacer?", opciones: ["Lavar con agua por 15 minutos","Irrigar con suero fisiológico por 15 minutos","Aplicar colirio y esperar","Tapar el ojo y acudir a urgencias"], correcta: 1, feedback: "El contacto ocular con citotóxico requiere irrigar con suero fisiológico (SF) por 15 minutos." },
+    { texto: "¿Qué debes hacer con la ropa contaminada con citotóxico?", opciones: ["Lavarla en la lavandería del hospital","Dejarla en el casillero personal","Retirarla y dejarla en contenedor rojo","Botarla a la basura común"], correcta: 2, feedback: "Se debe retirar toda la ropa contaminada con el citostático y dejarla en el contenedor rojo." },
+    { texto: "¿A quién debes informar primero si tienes un accidente con citotóxicos?", opciones: ["Al médico tratante","A Jefatura o Supervisor","Al servicio de urgencias","A Recursos Humanos"], correcta: 1, feedback: "Se debe informar a Jefatura/Supervisor, quienes gestionan la derivación a ACHS." },
+    { texto: "¿A dónde se deriva al trabajador si tiene un accidente con citotóxicos o fluidos?", opciones: ["Hospital San Borja","ACHS","Clínica Las Condes","Urgencia del mismo FALP"], correcta: 1, feedback: "El centro de derivación es ACHS. Se debe informar primero a la Jefatura/Supervisor." },
+    { texto: "¿Qué documentos debes llevar si te derivan a ACHS tras un accidente?", opciones: ["Solo el carnet de identidad","Muestra fuente, consentimiento firmado y carnet de identidad","Ficha clínica del paciente y carnet","Solo el formulario de FALP"], correcta: 1, feedback: "Debes llevar: Muestra fuente, Consentimiento firmado del paciente o familiar, y Carnet de Identidad." },
+    { texto: "Si tienes un accidente cortopunzante con fluidos corporales, ¿cuánto tiempo debes lavar?", opciones: ["30 segundos","5 minutos","Mínimo 2 minutos","15 minutos"], correcta: 2, feedback: "Se debe lavar inmediatamente con agua por mínimo 2 minutos. Si es en el ojo, se usa suero fisiológico." },
+    { texto: "Tras un accidente con sangre o fluidos, ¿en qué tubo se toma la muestra al paciente?", opciones: ["Tubo rojo sin anticoagulante","Tubo azul con citrato","Tubo lila con anticoagulante 5 cc","Tubo verde con heparina"], correcta: 2, feedback: "La muestra se toma en tubo lila con anticoagulante de 5 cc, con autorización del paciente o familia." },
+    { texto: "¿Dentro de cuántas horas debe ingresar Jefatura el reporte a LISTPLUS tras un accidente?", opciones: ["6 horas","12 horas","24 horas","48 horas"], correcta: 2, feedback: "Jefatura debe llenar el DIAT e ingresar el reporte a LISTPLUS dentro de las 24 horas del incidente." },
+    { texto: "¿Qué documento debe llenar Jefatura después de un accidente con fluidos?", opciones: ["Formulario SIRI","DIAT","Reporte KAWAK","Carta al MINSAL"], correcta: 1, feedback: "Jefatura debe llenar el DIAT (Declaración Individual de Accidente del Trabajo) e ingresar reporte a LISTPLUS dentro de las 24 horas." },
+    { texto: "¿Qué EPP debes usar frente a un derrame de citotóxico?", opciones: ["Solo guantes de látex","El EPP completo del kit anti-derrame","Mascarilla y guantes simples","Ninguno si es un derrame pequeño"], correcta: 1, feedback: "Ante cualquier derrame de citotóxico debes colocarte el EPP completo que viene en el kit anti-derrame, sin excepciones." },
+
+    // CÓDIGO ROJO
+    { texto: "¿Cuál de estas situaciones NO es considerada Código Rojo en FALP?", opciones: ["Convulsión","Paro Cardio-Respiratorio","Fractura de cadera","Hemorragia intensa"], correcta: 2, feedback: "Los Códigos Rojo en FALP son: Convulsión, Dificultad respiratoria, Compromiso de conciencia, Hemorragia intensa y Paro Cardio-Respiratorio. La fractura no está incluida." },
+    { texto: "Estás frente a un Código Rojo. ¿A qué número llamas?", opciones: ["911","133","5009","800"], correcta: 2, feedback: "Para activar un Código Rojo interno en FALP se llama al 5009." },
+    { texto: "¿Qué es un Código Rojo en FALP?", opciones: ["Alerta por incendio en el edificio","Situación urgente que pone en peligro inmediato la vida","Emergencia administrativa de alta prioridad","Protocolo de evacuación masiva"], correcta: 1, feedback: "El Código Rojo es una situación urgente que pone en peligro inmediato la vida de un paciente o persona." },
+    { texto: "¿Cuál es el primer paso correcto al enfrentar un Código Rojo?", opciones: ["Identificar la ubicación","Llamar al 5009","Identificarme","Solicitar el Código Rojo"], correcta: 1, feedback: "El orden correcto es: 1) Llamar al 5009, 2) Identificarme, 3) Indicar la ubicación, 4) Solicitar Código Rojo." },
+    { texto: "¿Cuántas situaciones se consideran Código Rojo en FALP?", opciones: ["3","4","5","6"], correcta: 2, feedback: "Son 5 situaciones: Convulsión, Dificultad respiratoria, Compromiso de conciencia, Hemorragia intensa y Paro Cardio-Respiratorio." },
+    { texto: "¿Quién integra el equipo de respuesta del Código Rojo?", opciones: ["Solo médicos y enfermeras de UPC","Médico residente UPC, Guardia, Enfermera UPC y Enfermera/médico del sector","Solo el médico de turno y el guardia","Médico jefe, paramédico y guardia"], correcta: 1, feedback: "El Código Rojo lo componen: Médico residente UPC, Guardia, Enfermera UPC y Enfermera/médico del sector donde ocurre el evento." },
+    { texto: "¿La dificultad respiratoria es Código Rojo en FALP?", opciones: ["Sí, es una de las 5 situaciones","No, se maneja con urgencia normal","Solo si hay compromiso de conciencia","Depende de la gravedad"], correcta: 0, feedback: "Sí. La dificultad respiratoria es una de las 5 situaciones que se consideran Código Rojo en FALP." },
+    { texto: "Después de llamar al 5009 por Código Rojo, ¿qué debes hacer a continuación?", opciones: ["Esperar instrucciones","Identificarme e indicar la ubicación del suceso","Ir a buscar el carro de paro","Evacuar el área"], correcta: 1, feedback: "Después de llamar al 5009, debes identificarte e indicar con claridad la ubicación del suceso, y luego solicitar el Código Rojo." },
+    { texto: "¿El compromiso de conciencia es considerado Código Rojo en FALP?", opciones: ["Sí","No","Solo si es completo","Solo en adultos mayores"], correcta: 0, feedback: "Sí, el compromiso de conciencia es una de las 5 situaciones de Código Rojo en FALP." },
+
+    // ESTERILIZACIÓN
+    { texto: "¿Qué se hace con el material sucio ANTES de enviarlo a esterilización?", opciones: ["Se lava completo en el servicio","Se enjuaga con chorro de agua y se deja en área de material sucio","Se desinfecta con alcohol al 70%","Se envuelve en paño estéril"], correcta: 1, feedback: "El material sucio se enjuaga con chorro de agua y se deja en el área de material sucio. En 5° piso NO se lava." },
+    { texto: "¿Dónde se lava el material para esterilización?", opciones: ["En el servicio donde se usó","En el 5° piso","En la Central de Esterilización","En cualquier lavamanos del pasillo"], correcta: 2, feedback: "Todo el material se lava en la Central de Esterilización. En 5° piso NO se lava." },
+    { texto: "En el 5° piso, ¿qué NO se debe hacer con el material sucio?", opciones: ["Enjuagarlo con agua","Dejarlo en área de material sucio","Lavarlo","Etiquetarlo"], correcta: 2, feedback: "En 5° piso NO se lava el material. Solo se enjuaga con chorro de agua y se deja en el área de material sucio." },
+    { texto: "¿Dónde se revisan las normas y protocolos de FALP?", opciones: ["LISTPLUS","Intranet FALP","KAWAK","Carpeta compartida del servicio"], correcta: 2, feedback: "Las normas y protocolos se revisan en la plataforma KAWAK." },
+    { texto: "¿Dónde se realizan los reportes de incidentes en FALP?", opciones: ["KAWAK","LISTPLUS","SIRI","Formulario en papel"], correcta: 1, feedback: "Los reportes de incidentes se realizan en la plataforma LISTPLUS." },
+
+    // RECLAMOS
+    { texto: "Un paciente quiere hacer un reclamo en horario hábil. ¿Dónde debe ir?", opciones: ["Con el médico tratante","Unidad de Servicio al Paciente, 2° piso, Torre Norte","Dirección del hospital","Urgencias"], correcta: 1, feedback: "En horario hábil, el reclamo se realiza presencialmente en la Unidad de Servicio al Paciente, 2° piso, Torre Norte." },
+    { texto: "¿Cuántas formas existen para realizar un reclamo en FALP?", opciones: ["1","2","3","4"], correcta: 2, feedback: "Existen 3 formas: 1) Presencial en horario hábil, 2) Formulario en horario inhábil, 3) Reclamos por atención de Telemedicina." },
+    { texto: "Un paciente quiere reclamar fuera del horario hábil. ¿Qué puede hacer?", opciones: ["Solo esperar al día siguiente","Completar formulario en Imagenología, Radioterapia, etc., o en www.falp.org","Llamar al 911","Escribir al Gerente General"], correcta: 1, feedback: "En horario inhábil se puede completar el formulario en Imagenología, Consultas ambulatorias, Radioterapia oriente, Centro médico, o en www.falp.org." },
+    { texto: "¿Cómo se realizan los reclamos por atención de Telemedicina?", opciones: ["Presencialmente en el 2° piso","A través de www.institutooncologicofalp.cl","Llamando al 911","Por correo al jefe de servicio"], correcta: 1, feedback: "Los reclamos por atención de Telemedicina se realizan a través del sitio web www.institutooncologicofalp.cl" },
+    { texto: "¿Qué debes informarle al paciente respecto a los reclamos?", opciones: ["Que solo puede reclamar en horario hábil","Que existen 3 maneras de realizar un reclamo","Que debe esperar el alta","Que los reclamos deben ser escritos en la ficha"], correcta: 1, feedback: "Debes informarle al paciente que existen 3 maneras de realizar un reclamo: presencial, formulario en horario inhábil y por Telemedicina." },
+
+    // IDENTIFICACIÓN PACIENTE
+    { texto: "¿Qué dato se usa como verificador en la ficha clínica del paciente?", opciones: ["El número de folio","El número de cama","El RUT o DNI","El nombre completo"], correcta: 2, feedback: "El RUT es el verificador de cada paciente en la ficha clínica, NO el folio." },
+    { texto: "Un paciente no tiene segundo nombre. ¿Qué se escribe en el brazalete?", opciones: ["Se deja en blanco","Se escribe 'N/A'","Se escribe 'SSN'","Se escribe 'SN'"], correcta: 2, feedback: "Si no existe segundo nombre se escribe SSN. Ej: Juan SSN Pérez González." },
+    { texto: "Un paciente no tiene segundo apellido. ¿Qué se escribe en el brazalete?", opciones: ["Se deja en blanco","Se escribe 'SSA'","Se escribe 'N/A'","Se escribe 'SA'"], correcta: 1, feedback: "Si no existe segundo apellido se escribe SSA. Ej: Juan Luis Pérez SSA." },
+    { texto: "Si el brazalete no cabe en la muñeca, ¿qué debes hacer?", opciones: ["Dejarlo sin brazalete","Unir dos brazaletes o poner en extremidades inferiores y avisar a todas las unidades","Usar papel adherido","Esperar brazalete más grande"], correcta: 1, feedback: "Se deben unir dos brazaletes o colocarlos en extremidades inferiores, dando aviso a todas las unidades implicadas y al personal que atiende." },
+    { texto: "¿Cuántos nombres y apellidos debe tener el brazalete del paciente?", opciones: ["1 nombre y 1 apellido","2 nombres y 1 apellido","2 nombres y 2 apellidos","1 nombre y 2 apellidos"], correcta: 2, feedback: "El brazalete debe tener 2 nombres y 2 apellidos, más el RUT o DNI." },
+    { texto: "¿Qué característica tiene la ficha clínica en FALP?", opciones: ["Hay una por episodio de hospitalización","Es única por paciente y siempre debe estar con él","Se comparte entre pacientes del mismo servicio","Se archiva en bodega tras el alta"], correcta: 1, feedback: "La ficha clínica es única por paciente y siempre debe estar con él. El RUT es el verificador, no el folio." },
+    { texto: "¿Qué datos son OBLIGATORIOS en el brazalete del paciente?", opciones: ["Nombre completo y fecha de nacimiento","2 nombres, 2 apellidos y RUT o DNI","Nombre, RUT y diagnóstico","Nombre, cama y servicio"], correcta: 1, feedback: "El brazalete debe tener obligatoriamente: 2 nombres, 2 apellidos y RUT o DNI del paciente." }
+  ];
+
+  const PREGUNTAS_POR_RONDA = 20;
+  let preguntasActuales = [];
+
+  function seleccionarPreguntas() {
+    return [...bancoPregunta].sort(() => Math.random() - 0.5).slice(0, PREGUNTAS_POR_RONDA);
+  }
+
+  function renderQuiz() {
+    preguntasActuales = seleccionarPreguntas();
+    const container = document.getElementById('quiz-container');
+    container.innerHTML = '';
+    preguntasActuales.forEach((p, i) => {
+      const div = document.createElement('div');
+      div.className = 'q-card';
+      div.id = 'q-' + i;
+      div.innerHTML = `
+        <div class="q-num">Pregunta ${i + 1} de ${PREGUNTAS_POR_RONDA}</div>
+        <div class="q-texto">${p.texto}</div>
+        ${p.opciones.map((op, j) => `
+          <label class="q-opcion" id="op-${i}-${j}">
+            <input type="radio" name="q${i}" value="${j}"> ${op}
+          </label>
+        `).join('')}
+        <div class="q-feedback" id="fb-${i}"></div>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  function verResultados() {
+    let correctas = 0;
+    preguntasActuales.forEach((p, i) => {
+      const seleccionada = document.querySelector(`input[name="q${i}"]:checked`);
+      const feedback = document.getElementById('fb-' + i);
+      document.querySelectorAll(`input[name="q${i}"]`).forEach(r => r.disabled = true);
+      if (!seleccionada) {
+        document.getElementById(`op-${i}-${p.correcta}`).classList.add('correcta-no-elegida');
+        feedback.textContent = '⚠️ No respondiste. ' + p.feedback;
+        feedback.className = 'q-feedback incorrecto';
+        feedback.style.display = 'block';
+        return;
+      }
+      const elegida = parseInt(seleccionada.value);
+      if (elegida === p.correcta) {
+        document.getElementById(`op-${i}-${elegida}`).classList.add('correcta');
+        feedback.textContent = '✅ ¡Correcto! ' + p.feedback;
+        feedback.className = 'q-feedback correcto';
+        correctas++;
+      } else {
+        document.getElementById(`op-${i}-${elegida}`).classList.add('incorrecta');
+        document.getElementById(`op-${i}-${p.correcta}`).classList.add('correcta-no-elegida');
+        feedback.textContent = '❌ Incorrecto. ' + p.feedback;
+        feedback.className = 'q-feedback incorrecto';
+      }
+      feedback.style.display = 'block';
+    });
+    document.getElementById('btn-resultado').style.display = 'none';
+    const pct = Math.round((correctas / PREGUNTAS_POR_RONDA) * 100);
+    const emoji = pct >= 90 ? '🏆' : pct >= 70 ? '👍' : '📚';
+    const msg   = pct >= 90 ? '¡Excelente! Estás muy bien preparado/a.' :
+                  pct >= 70 ? 'Buen resultado, repasa las incorrectas.' :
+                  'Sigue estudiando, ¡tú puedes!';
+    const resDiv = document.getElementById('resultado-final');
+    resDiv.innerHTML = `
+      <div class="resultado-box">
+        <div style="font-size:2.5rem">${emoji}</div>
+        <div class="puntaje">${correctas}/${PREGUNTAS_POR_RONDA}</div>
+        <p>${pct}% de respuestas correctas</p>
+        <div class="mensaje">${msg}</div>
+        <p style="margin-top:12px;font-size:.8rem;opacity:.7">Banco de ${bancoPregunta.length} preguntas — cada intento muestra 20 distintas 🎲</p>
+      </div>
+    `;
+    resDiv.style.display = 'block';
+    document.getElementById('btn-reiniciar').style.display = 'block';
+    resDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function reiniciarQuiz() {
+    renderQuiz();
+    document.getElementById('btn-resultado').style.display = 'block';
+    document.getElementById('resultado-final').style.display = 'none';
+    document.getElementById('btn-reiniciar').style.display = 'none';
+    document.getElementById('cuestionario').scrollIntoView({ behavior: 'smooth' });
+  }
+
+  renderQuiz();
+</script>
+</body>
+</html>
